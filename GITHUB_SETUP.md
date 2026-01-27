@@ -7,8 +7,8 @@
 1. 訪問 [GitHub](https://github.com)
 2. 點擊右上角的 "+" 按鈕，選擇 "New repository"
 3. 填寫倉庫信息：
-   - **Repository name**: `openbb-web-app` (或你喜歡的名稱)
-   - **Description**: `OpenBB Web App - 現代化股票分析平台`
+   - **Repository name**: `acestockbb`
+   - **Description**: `AceStockBB - 現代化股票分析平台`
    - **Visibility**: Public (推薦) 或 Private
    - **不要**勾選 "Add a README file" (我們已經有了)
    - **不要**勾選 "Add .gitignore" (我們已經有了)
@@ -21,8 +21,8 @@
 複製 GitHub 給出的倉庫 URL，然後執行：
 
 ```bash
-# 添加遠程倉庫 (替換為你的 GitHub 用戶名)
-git remote add origin https://github.com/YOUR_USERNAME/openbb-web-app.git
+# 添加遠程倉庫
+git remote add origin https://github.com/NickBuddy2046/acestockbb.git
 
 # 推送到 GitHub
 git branch -M main
@@ -89,8 +89,8 @@ git push -u origin main
 ### 1. 克隆到其他設備
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/openbb-web-app.git
-cd openbb-web-app/openbb-convex-app
+git clone https://github.com/NickBuddy2046/acestockbb.git
+cd acestockbb/openbb-convex-app
 npm install
 ```
 

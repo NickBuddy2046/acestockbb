@@ -1,4 +1,4 @@
-# OpenBB Web App - 股票分析平台
+# AceStockBB - 股票分析平台
 
 一個基於 Next.js 14 + Convex + TypeScript 構建的現代化股票分析平台，靈感來自 OpenBB Platform。
 
@@ -42,8 +42,8 @@
 
 1. **克隆倉庫**
 ```bash
-git clone https://github.com/your-username/openbb-web-app.git
-cd openbb-web-app
+git clone https://github.com/NickBuddy2046/acestockbb.git
+cd acestockbb
 ```
 
 2. **安裝依賴**
@@ -248,7 +248,7 @@ npx convex deploy --prod
 
 如有問題或建議，請通過以下方式聯繫：
 
-- 創建 [Issue](https://github.com/your-username/openbb-web-app/issues)
+- 創建 [Issue](https://github.com/NickBuddy2046/acestockbb/issues)
 - 發送 Pull Request
 - 郵件: your-email@example.com
 
