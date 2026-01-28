@@ -5,6 +5,7 @@ import { RealTimeStockCard } from "@/components/dashboard/RealTimeStockCard";
 import { WatchlistCard } from "@/components/dashboard/WatchlistCard";
 import { EnhancedWatchlistCard } from "@/components/dashboard/EnhancedWatchlistCard";
 import { StockDiscovery } from "@/components/dashboard/StockDiscovery";
+import { OptimizedStockDiscovery } from "@/components/dashboard/OptimizedStockDiscovery";
 import { StockComparison } from "@/components/dashboard/StockComparison";
 import { PortfolioCard } from "@/components/dashboard/PortfolioCard";
 import { StockChart } from "@/components/charts/StockChart";
@@ -48,8 +49,8 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* 股票發現 */}
-            <StockDiscovery />
+            {/* 股票發現 - 優化版 */}
+            <OptimizedStockDiscovery />
 
             {/* 股票比較 */}
             <StockComparison />

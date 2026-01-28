@@ -286,7 +286,8 @@ export const performDailyRefresh = action({
           
         } catch (error) {
           console.error(`Error fetching data for ${symbol}:`, error);
-          errorMessage += `${symbol}: ${error.message}; `;
+          const errorMsg = error instanceof Error ? error.message : String(error);
+          errorMessage += `${symbol}: ${errorMsg}; `;
         }
       }
       
@@ -306,16 +307,17 @@ export const performDailyRefresh = action({
       
     } catch (error) {
       // 記錄失敗
+      const finalErrorMessage = error instanceof Error ? error.message : String(error);
       await ctx.runMutation("dailyDataRefresh:logDataRefresh", {
         status: "failed",
         symbolsUpdated: successCount,
-        errorMessage: error.message,
+        errorMessage: finalErrorMessage,
         endTime: Date.now(),
       });
       
       return {
         success: false,
-        message: `數據刷新失敗: ${error.message}`,
+        message: `數據刷新失敗: ${finalErrorMessage}`,
         symbolsUpdated: successCount,
       };
     }

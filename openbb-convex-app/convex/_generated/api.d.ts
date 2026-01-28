@@ -9,6 +9,7 @@
  */
 
 import type * as dailyDataRefresh from "../dailyDataRefresh.js";
+import type * as simpleRefresh from "../simpleRefresh.js";
 import type * as stocks from "../stocks.js";
 import type * as users from "../users.js";
 import type * as watchlists from "../watchlists.js";
@@ -21,6 +22,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   dailyDataRefresh: typeof dailyDataRefresh;
+  simpleRefresh: typeof simpleRefresh;
   stocks: typeof stocks;
   users: typeof users;
   watchlists: typeof watchlists;
