@@ -3,10 +3,11 @@ import { TWStockApiService } from '@/lib/twStockApi';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { symbol: string } }
+  context: { params: Promise<{ symbol: string }> }
 ) {
   try {
-    const symbol = params.symbol.toUpperCase();
+    const { symbol: rawSymbol } = await context.params;
+    const symbol = rawSymbol.toUpperCase();
     const { searchParams } = new URL(request.url);
     
     // 獲取查詢參數

@@ -35,6 +35,58 @@ export class TWStockApiService {
   private static requestCache = new Map<string, TWStockPrice>();
   private static cacheTimestamps = new Map<string, number>();
 
+  // 台股名稱映射表
+  static readonly TW_STOCK_NAMES: { [key: string]: string } = {
+    // 熱門上市股票
+    '2330': '台積電',
+    '2317': '鴻海',
+    '2454': '聯發科',
+    '2881': '富邦金',
+    '2412': '中華電',
+    '1301': '台塑',
+    '2303': '聯電',
+    '2002': '中鋼',
+    '1216': '統一',
+    '2886': '兆豐金',
+    '2891': '中信金',
+    '2382': '廣達',
+    '2308': '台達電',
+    '2207': '和泰車',
+    '2105': '正新',
+    '2357': '華碩',
+    '3008': '大立光',
+    '2327': '國巨',
+    '2409': '友達',
+    '2474': '可成',
+    
+    // ETF
+    '0050': '元大台灣50',
+    '0056': '元大高股息',
+    '00878': '國泰永續高股息',
+    '00881': '國泰台灣5G+',
+    '00692': '富邦公司治理',
+    '00713': '元大台灣高息低波',
+    '00757': '統一FANG+',
+    '006208': '富邦台50',
+    
+    // 熱門上櫃股票
+    '6547': '高端疫苗',
+    '6180': '橘子',
+    '4938': '和碩',
+    '3034': '聯詠',
+    '6415': '矽力-KY',
+    '6669': '緯穎',
+    '4904': '遠傳',
+    '6176': '瑞儀',
+    '3711': '日月光投控',
+    '6239': '力成',
+    '8046': '南電',
+    '6505': '台塑化',
+    '3443': '創意',
+    '6770': '力積電',
+    '4966': '譜瑞-KY',
+  };
+
   // 熱門台股列表
   static readonly POPULAR_TW_STOCKS = {
     TSE: [
@@ -68,7 +120,22 @@ export class TWStockApiService {
     ]
   };
 
-  // 清理過期緩存
+  // 獲取股票中文名稱
+  private static getStockName(symbol: string, apiName?: string): string {
+    // 優先使用本地映射表
+    const localName = this.TW_STOCK_NAMES[symbol];
+    if (localName) {
+      return localName;
+    }
+    
+    // 使用 API 返回的名稱
+    if (apiName && apiName.trim()) {
+      return apiName.trim();
+    }
+    
+    // 備用名稱
+    return `${symbol} 公司`;
+  }
   private static cleanExpiredCache() {
     const now = Date.now();
     for (const [symbol, timestamp] of this.cacheTimestamps.entries()) {
@@ -158,7 +225,7 @@ export class TWStockApiService {
 
       const twStock: TWStockPrice = {
         symbol: stockData.c || symbol,
-        companyName: stockData.n || stockData.nf || symbol,
+        companyName: this.getStockName(symbol, stockData.n || stockData.nf),
         price: price,
         change: change,
         changePercent: changePercent,
@@ -254,7 +321,7 @@ export class TWStockApiService {
 
           const twStock: TWStockPrice = {
             symbol: stockData.c || '',
-            companyName: stockData.n || stockData.nf || '',
+            companyName: this.getStockName(stockData.c || '', stockData.n || stockData.nf),
             price: price,
             change: change,
             changePercent: changePercent,
@@ -371,7 +438,7 @@ export class TWStockApiService {
 
     return {
       symbol,
-      companyName: `${symbol} 公司`,
+      companyName: this.getStockName(symbol),
       price: Math.round(price * 100) / 100,
       change: Math.round(change * 100) / 100,
       changePercent: Math.round(changePercent * 100) / 100,
